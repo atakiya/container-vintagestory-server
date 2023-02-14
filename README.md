@@ -46,7 +46,7 @@ services:
       - "42420:42420/tcp"
     volumes:
       - app:/app
-	    - data:/data
+      - data:/data
     environment:
       SERVER_VERSION: "1.17.11"
 
