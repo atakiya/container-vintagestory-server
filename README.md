@@ -31,7 +31,7 @@ docker run -it \
 	-e SERVER_VERSION="1.17.11"
 	-v vintagestory_app:/app \
 	-v vintagestory_data:/data \
-	<imageurlhere>
+	ghcr.io/atakiya/container-vintage-story-server:latest
 ```
 
 ### Docker Compose
@@ -40,7 +40,7 @@ version: '3.1'
 
 services:
   gameserver:
-    image: <imageurlhere>
+    image: ghcr.io/atakiya/container-vintage-story-server:latest
     ports:
       # Gameserver port
       - "42420:42420/tcp"
