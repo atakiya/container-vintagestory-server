@@ -11,7 +11,8 @@ RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/
 	apk add --no-cache \
 		ca-certificates \
 		mono@testing \
-		mono-dev@testing
+		mono-dev@testing && \
+	cert-sync /etc/ssl/certs/ca-certificates.crt
 
 # Setup service user
 RUN addgroup --gid ${GID} -S ${USER} && \
