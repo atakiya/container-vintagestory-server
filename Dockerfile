@@ -1,18 +1,14 @@
-FROM docker.io/alpine AS base
+FROM mcr.microsoft.com/dotnet/runtime:7.0-alpine AS base
 
 ENV USER "vintagestory"
 ENV UID "1001"
 ENV GID "1001"
-ENV SERVER_VERSION "1.17.11"
+ENV SERVER_VERSION "1.18.8"
 
-# Required for mono and mono-dev
-RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
-	apk update && \
-	apk add --no-cache \
-		ca-certificates \
-		mono@testing \
-		mono-dev@testing && \
-	cert-sync /etc/ssl/certs/ca-certificates.crt
+RUN apk update \
+	&& apk add --no-cache \
+	ca-certificates \
+	gcompat
 
 # Setup service user
 RUN addgroup --gid ${GID} -S ${USER} && \

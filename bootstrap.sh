@@ -1,6 +1,9 @@
 #!/bin/sh
 
-BOOTSTRAP_URL=https://cdn.vintagestory.at/gamefiles/stable/vs_server_${SERVER_VERSION}.tar.gz
+PLATFORM=linux
+ARCH=x64
+
+BOOTSTRAP_URL=https://cdn.vintagestory.at/gamefiles/stable/vs_server_${PLATFORM}-${ARCH}_${SERVER_VERSION}.tar.gz
 
 bs_print () { printf '%s\n' "[BOOTSTRAP] ""$@"""; }
 
@@ -17,4 +20,5 @@ fi
 
 bs_print "Handing over to app..."
 cd /app/${SERVER_VERSION}
-exec mono ./VintagestoryServer.exe --dataPath /data "$@"
+
+exec dotnet ./VintagestoryServer.dll --dataPath /data "$@"
