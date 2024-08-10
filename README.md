@@ -15,7 +15,8 @@ ENVVAR | USE | DEFAULT
 `UID` | unix userid | `1001`
 `GID` | unix groupid | `1001`
 `SERVER_VERSION` | game version | `latest`
-`UPDATE_CHANNEL` | what channel to download from<br>(`stable` / `unstable`) | `stable`
+
+<!--~~`UPDATE_CHANNEL`~~ | ~~what channel to download from<br>(`stable` / `unstable`)~~ | ~~`stable`~~-->
 
 ⚠️ _Do not modify the USER, UID or GID unless you know what you're doing!_
 
