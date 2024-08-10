@@ -2,7 +2,7 @@
 
 ## About
 
-An alpine-based container image that runs the official Vintage Story server, running on the net7 runtime.
+A debian-based container image that runs the official Vintage Story server, on the net7 runtime.
 
 For information on how to configure the Vintage Story server, please see https://wiki.vintagestory.at/index.php?title=Setting_up_a_Multiplayer_Server#Basic_Configuration
 
@@ -14,7 +14,8 @@ ENVVAR | USE | DEFAULT
 `USER` | unix service name | `vintagestory`
 `UID` | unix userid | `1001`
 `GID` | unix groupid | `1001`
-`SERVER_VERSION` | game version | `1.18.8`
+`SERVER_VERSION` | game version | `latest`
+`UPDATE_CHANNEL` | what channel to download from<br>(`stable` / `unstable`) | `stable`
 
 ⚠️ _Do not modify the USER, UID or GID unless you know what you're doing!_
 
@@ -30,7 +31,7 @@ PATH | USE
 docker run -it \
 	--name "vintagestory" \
 	-p 42420:42420 \
-	-e SERVER_VERSION="1.18.8"
+	-e SERVER_VERSION="1.19.8"
 	-v vintagestory_app:/app \
 	-v vintagestory_data:/data \
 	ghcr.io/atakiya/container-vintage-story-server:latest
@@ -41,7 +42,7 @@ docker run -it \
 ```yaml
 services:
   gameserver:
-    image: ghcr.io/atakiya/container-vintage-story-server:latest
+    image: ghcr.io/atakiya/container-vintagestory-server:latest
     ports:
       # Gameserver port
       - "42420:42420/tcp"
@@ -49,7 +50,7 @@ services:
       - app:/app
       - data:/data
     environment:
-      SERVER_VERSION: "1.18.8"
+      SERVER_VERSION: "1.19.8"
 
 volumes:
   app:
