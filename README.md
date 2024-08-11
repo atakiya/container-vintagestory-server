@@ -8,7 +8,13 @@ For information on how to configure the Vintage Story server, please see https:/
 
 ## Usage
 
-Available environment variables:
+Available image mirrors:
+SERVICE | URL
+--------|-----
+GitHub Container Registry | ghcr.io/atakiya/vintagestory-server
+Docker Hub | docker.io/avunia/vintagestory-server
+
+Available optional environment variables:
 ENVVAR | USE | DEFAULT
 -----------------|-------------------|---------------
 `USER` | unix service name | `vintagestory`
@@ -34,7 +40,7 @@ docker run -it \
 	-e SERVER_VERSION="1.19.8" \
 	-v vintagestory_app:/app \
 	-v vintagestory_data:/data \
-	ghcr.io/atakiya/container-vintage-story-server:latest
+	ghcr.io/atakiya/vintagestory-server:latest
 ```
 
 ### Docker Compose
@@ -42,7 +48,7 @@ docker run -it \
 ```yaml
 services:
   gameserver:
-    image: ghcr.io/atakiya/container-vintagestory-server:latest
+    image: ghcr.io/atakiya/vintagestory-server:latest
     ports:
       # Gameserver port
       - "42420:42420/tcp"
@@ -56,3 +62,26 @@ volumes:
   app:
   data:
 ```
+
+### Systemd/Quadlet (Podman)
+
+```ini
+[Unit]
+After=network-online.target
+Description=Vintagestory Server
+
+[Container]
+Image=ghcr.io/atakiya/vintagestory-server:latest
+PodmanArgs=--interactive
+PodmanArgs=--tty
+PublishPort=42420:42420/tcp
+Volume=vintagestory-app.volume:/app
+Volume=vintagestory-data.volume:/data
+Environment="SERVER_VERSION=1.19.8"
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+```
+
+_Don't forget to create .volume units with `[Volume]` as contents_
