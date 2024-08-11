@@ -1,13 +1,23 @@
 #!/bin/sh
 
-API_URL=https://api.vintagestory.at/stable.json
-SERVER_VERSION="${SERVER_VERSION:-latest}"
-
 bs_cd () { cd "$@" || exit; }
 bs_print () { printf '%s\n' "[BOOTSTRAP] ""$*"""; }
 
 command -v wget >/dev/null 2>&1 || { bs_print "FATAL: wget can not be executed." >&2; exit 1; }
 command -v jq >/dev/null 2>&1 || { bs_print "FATAL: jq can not be executed." >&2; exit 1; }
+
+SERVER_VERSION="${SERVER_VERSION:-latest}"
+UPDATE_CHANNEL="${UPDATE_CHANNEL:-stable}"
+API_URL=https://127.0.0.1/invalid.json
+
+if [ "$UPDATE_CHANNEL" = "stable" ]; then
+	API_URL=https://api.vintagestory.at/stable.json
+elif [ "$UPDATE_CHANNEL" = "unstable" ]; then
+	API_URL=https://api.vintagestory.at/unstable.json
+else
+	bs_print "WARN: Invalid UPDATE_CHANNEL set, please read the documentation carefully!"
+fi
+
 bs_cd /app
 
 _API_DATA=$(wget -O- $API_URL)
