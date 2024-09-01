@@ -9,10 +9,11 @@ For information on how to configure the Vintage Story server, please see https:/
 ## Usage
 
 Available image mirrors:
-SERVICE | URL
---------|-----
+SERVICE | URL | NOTE
+--------|-----|------
 GitHub Container Registry | ghcr.io/atakiya/vintagestory-server
-Docker Hub | docker.io/avunia/vintagestory-server
+~~Docker Hub~~ | ~~docker.io/avunia/vintagestory-server~~ | Deleted as of 2024-09-01
+Quay.io | quay.io/atakiya/vintagestory-server
 
 Available optional environment variables:
 ENVVAR | USE | DEFAULT
