@@ -24,19 +24,19 @@ jobs:
 
       - name: Set metadata for GHCR image
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ env.GHCR_REPO }}
 
       - name: Log in to GitHub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push container image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
@@ -52,7 +52,7 @@ jobs:
 
       - name: Set metadata for Quay.io image
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: quay.io/${{ env.QUAY_NAMESPACE }}/${{ env.QUAY_REPO }}
 
@@ -64,7 +64,7 @@ jobs:
           password: ${{ secrets.QUAY_TOKEN }}
 
       - name: Build and push container image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
