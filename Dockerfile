@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
+FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
 
 LABEL org.opencontainers.image.authors="Avunia Takiya <avunia.takiya.eu>"
 LABEL org.opencontainers.image.licenses="MIT"
